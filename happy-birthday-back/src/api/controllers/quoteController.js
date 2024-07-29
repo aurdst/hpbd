@@ -9,27 +9,29 @@ exports.getRandomQuote = async (req, res) => {
 };
 
 exports.insertQuoteInDb = async (req, res, db) => {
-  // Recuperer les quotes
-  try {
-    fs.createReadStream(`./data/${CSV_QUOTES}`)
-      .pipe(csv())
-      .on('data', (row) => {
-        const { quote, author } = row;
-        db.run('INSERT OR IGNORE INTO quotes (quotes, author) VALUES (?, ?)', [quote, author], (err) => {
-          if (err) {
-            return console.error('Error inserting', err.message);
-          }
-        })
-        .on('end', () => {
-            console.log('CSV successfully imported');
-            res.json({ message: 'Quotes successfully inserted into the database' });
-        })
-        .on('error', (error) => {
-            console.error('Error reading CSV file', error.message);
-            res.status(500).json({ error: error.message });
-        });
-      })
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
+  // Récupérer les quotes
+  fs.createReadStream(`./data/${CSV_QUOTES}`)
+    .pipe(csv())
+    .on('data', (row) => {
+      const { quote, author } = row;
+      db.run('INSERT OR IGNORE INTO quotes (quote, author) VALUES (?, ?)', [quote, author], (err) => {
+        if (err) {
+          console.error('Error inserting', err.message);
+        }
+      });
+    })
+    .on('end', () => {
+      console.log('CSV successfully imported');
+      res.json({ message: 'Quotes successfully inserted into the database' });
+    })
+    .on('error', (err) => {
+      console.error('Error reading CSV file', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+};
+
+exports.getQuotesFromDb(req, res) {
+  const query = 'SELECT * FROM quotes'
+  db.run(query)
+  
 }

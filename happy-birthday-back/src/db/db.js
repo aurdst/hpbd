@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./hpbd.db', (err) => {
+let db = new sqlite3.Database('./db/hpbd.db', (err) => {
     if (err) {
         return console.error(err.message);
     }

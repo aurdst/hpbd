@@ -1,5 +1,6 @@
 module.exports = (server) => {
     const quoteController = require("../controllers/quoteController");
+    const db = require('../../db/db');
 
     server
         .get("/getQuote", quoteController.getRandomQuote)
