@@ -3,4 +3,7 @@ module.exports = (server) => {
 
     server
         .get("/getQuote", quoteController.getRandomQuote)
+
+    server
+        .post('/insert', (req, res) => quoteController.insertQuoteInDb(req, res, db));
 }

@@ -23,9 +23,3 @@ exports.getTodaysBirthday = async (req, res) => {
         teachers_birthday : TEACHERS_BIRTHDAY
     })
 }
-
-// exports.insertIntoDb = async (req, res) => {
-//     const csvToInsert
-// }
-
-
