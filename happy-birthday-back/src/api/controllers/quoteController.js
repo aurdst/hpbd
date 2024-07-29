@@ -14,7 +14,6 @@ exports.insertQuoteInDb = async (req, res, db) => {
     .pipe(csv({ separator: ';' }))
     .on('data', (row) => {
       const { quote, author } = row;
-      console.log('Row:', row); // Ajout de logs pour diagnostiquer le contenu
       db.run('INSERT OR IGNORE INTO quotes (quote, author) VALUES (?, ?)', [quote, author], (err) => {
         if (err) {
           console.error('Error inserting', err.message);

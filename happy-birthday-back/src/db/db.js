@@ -16,4 +16,13 @@ db.run(query, (err) => {
     console.log('Table created or already exists');
 });
 
+// Création de la table brithday si elle n'existe pas déjà
+let queryBrith = 'CREATE TABLE IF NOT EXISTS brithday (id INTEGER PRIMARY KEY AUTOINCREMENT, brithday DATETIME, lastname TEXT, fristname TEXT, email TEXT);';
+db.run(queryBrith, (err) => {
+    if (err) {
+        return console.error('Error creating table:', err.message);
+    }
+    console.log('Table Brithday created or already exists');
+});
+
 module.exports = db;

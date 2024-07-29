@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import HeaderComponent from './HeaderComponent/Header';
 import QuoteOnlyComponent from './QuoteOnlyComponent/QuoteOnly';
+import Quotes from './QuoteComponent/Quotes';
 import BirthdayComponent from './BirthdayComponent/Birthday';
 import SidebarComponent from './SidebarComponent/Sidebar';
 
@@ -82,6 +83,7 @@ function App() {
       ) : (
         <QuoteOnlyComponent currentColor={CurrentColor} />
       )}{' '}
+      <Quotes/>
     </div>
   );
 }
