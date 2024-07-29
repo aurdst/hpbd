@@ -11,12 +11,15 @@ exports.getRandomQuote = async (req, res) => {
 exports.insertQuoteInDb = async (req, res, db) => {
   // Récupérer les quotes
   fs.createReadStream(`./data/${CSV_QUOTES}`)
-    .pipe(csv())
+    .pipe(csv({ separator: ';' }))
     .on('data', (row) => {
       const { quote, author } = row;
+      console.log('Row:', row); // Ajout de logs pour diagnostiquer le contenu
       db.run('INSERT OR IGNORE INTO quotes (quote, author) VALUES (?, ?)', [quote, author], (err) => {
         if (err) {
           console.error('Error inserting', err.message);
+        } else {
+            console.log(`Inserted quote: ${quote} by ${author}`); // Log pour vérifier l'insertion
         }
       });
     })
@@ -30,8 +33,12 @@ exports.insertQuoteInDb = async (req, res, db) => {
     });
 };
 
-exports.getQuotesFromDb(req, res) {
-  const query = 'SELECT * FROM quotes'
-  db.run(query)
-  
+exports.getQuotesFromDb = (req, res, db) => {
+  db.all('SELECT * FROM quotes', [], (err, rows) => {
+    if (err) {
+        console.log('err', err.message);
+        return res.status(500).json({ message: 'Erreur de chargement' });
+    }
+    res.json(rows);
+  });
 }

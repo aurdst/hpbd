@@ -7,4 +7,6 @@ module.exports = (server) => {
 
     server
         .post('/insert', (req, res) => quoteController.insertQuoteInDb(req, res, db));
+    server
+        .get("/getFromDB", (req, res) => quoteController.getQuotesFromDb(req, res, db))
 }

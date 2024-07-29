@@ -5,6 +5,6 @@ module.exports = (server) => {
         .get("/getBirthday", birthdayController.getTodaysBirthday)
         // .get("/sendBirthdayEmail", birthdayController.sendBirthdayEmail);
 
-    // server
-    //     .post("/insertCsvInDb", birthdayController.)
+    server
+        .post("/insertCsvInDb", birthdayController.)
 }
