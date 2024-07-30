@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Quotes.css'; // Assurez-vous d'importer le fichier CSS
+import '../../index.css'; 
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
@@ -11,8 +11,9 @@ const Quotes = () => {
     // Fonction pour récupérer les données des citations
     const fetchQuotes = async () => {
         try {
-            const response = await axios.get('http://localhost:3002/quotes/getQuote'); // Remplacez par votre URL si nécessaire
+            const response = await axios.get('http://localhost:3002/getFromDB'); // Remplacez par votre URL si nécessaire
             setQuotes(response.data); // Ajustez selon la structure de votre réponse
+            console.log(quotes)
             setLoading(false);
         } catch (err) {
             setError(err.message);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Birthdays.css'; // Assurez-vous d'importer le fichier CSS
+import '../../index.css'; // Assurez-vous d'importer le fichier CSS
 
 const Birthdays = () => {
     const [birthdays, setBirthdays] = useState([]);
@@ -47,7 +47,7 @@ const Birthdays = () => {
                 <ul>
                     {birthdays.map((birthday) => (
                         <li key={birthday.id}>
-                            <strong>{birthday.name}</strong> - {birthday.date}
+                            <strong>{birthday.brithday}</strong> - {birthday.lastname} - {birthday.fristname}
                         </li>
                     ))}
                 </ul>
